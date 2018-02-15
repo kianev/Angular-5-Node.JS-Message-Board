@@ -1,0 +1,27 @@
+<h1>Register</h1>
+<form [formGroup]="form" (ngSubmit)="onSumbit()">
+  <mat-card>
+      <mat-input-container>
+        <input matInput type="text" placeholder="First Name" formControlName="firstName">
+      </mat-input-container>
+
+      <mat-input-container>
+        <input matInput type="text" placeholder="Last Name" formControlName="lastName">
+      </mat-input-container>
+
+      <mat-input-container>
+        <input matInput type="email" placeholder="Email" formControlName="email">
+      </mat-input-container>
+
+      <mat-input-container>
+        <input matInput type="password" placeholder="Password" formControlName="password">
+      </mat-input-container>
+
+      <mat-input-container>
+        <input matInput type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+      </mat-input-container>
+      <span *ngIf="form.errors?.missmatchedFields">Passwords do not match</span>
+      <br><br>
+      <button mat-raised-button color="primary" class="registerBtn" [disabled]="form.invalid">Register</button>
+  </mat-card>
+</form>

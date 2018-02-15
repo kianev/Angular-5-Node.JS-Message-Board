@@ -1,0 +1,13 @@
+h1 {
+  text-align: center;
+}
+
+mat-card {
+  width: 400px;
+  margin: 10px auto;
+}
+
+mat-input-container {
+  width: 350px;
+}
+
