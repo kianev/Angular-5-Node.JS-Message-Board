@@ -1,11 +1,14 @@
+//import { require } from '../frontend/src/test'
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
 let messages = [{text: 'some text', owner: 'Pesho'}, {text: 'other text', owner: 'Gosho'}];
-let users = [];
+let users = [{firstName: 'Pesho', lastName: 'Peshev', email: 'test@test.com', password: '111111'}];
 
 // app.use(cors());
 
@@ -35,9 +38,36 @@ api.post('/messages', (req, res) => {
   res.json(req.body);
 });
 
-auth.post('/register', (req, res) => {
-  users.push(req.body);
+auth.post('/login', (req, res) => {
+ const user = users.find(user => user.email === req.body.email)
+  if(!user) {
+   sendAuthError(res);
+  }
+
+  if(user.password === req.body.password) {
+    sendToken(user, res);
+  } else {
+    sendAuthError(res);
+  }
 })
+
+auth.post('/register', (req, res) => {
+  let index = users.push(req.body) - 1;
+
+  let user = users[index];
+  user.id = index;
+
+  sendToken(user, res);
+})
+
+function sendToken (user, res) {
+  let token = jwt.sign(user, '123');
+  res.json({firstName: user.firstName, token});
+}
+
+function sendAuthError (res) {
+  return res.json({success: false, message: 'Email or password incorrect'});
+}
 
 app.use('/api', api);
 app.use('/auth', auth);

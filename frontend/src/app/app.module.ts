@@ -14,12 +14,14 @@ import {RouterModule} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import {AuthService} from './auth.service';
+import { LoginComponent } from './login/login.component';
 
 const routes = [
   {path: '', component: HomeComponent},
   {path: 'messages', component: MessagesComponent},
   {path: 'messages/:name', component: MessagesComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({
@@ -29,7 +31,8 @@ const routes = [
     NewMessageComponent,
     NavbarComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -31,6 +31,10 @@ export class WebService {
          error => this.handleError('Unable to post the message'));
   }
 
+  getUser() {
+    return this.httpClient.get(this.BASE_URL + '/users/me').subscribe();
+  }
+
   private handleError(error) {
     console.log(error);
     this.sb.open(error, 'close', {duration: 3000});
